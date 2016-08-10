@@ -1,4 +1,4 @@
 git add .
-git commit
+git commit "server commit"
 git push -u origin master
 

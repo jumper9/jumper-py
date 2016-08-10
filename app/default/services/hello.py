@@ -1,4 +1,4 @@
-import j
+﻿import j
 import os
 import re
 import json
@@ -32,26 +32,27 @@ def post():
 
 
 def dirs():
+  import codecs
+
   files = []
   for dirname, dirnames, filenames in os.walk('..'):
     # print path to all filenames.
     for filename in filenames:
         file = os.path.join(dirname, filename)[3:]
         if(file.endswith(".py") and not file.startswith("public/")):
-          with open("../"+file, 'r') as myfile:
+          with codecs.open("../"+file, "r",encoding='utf-8', errors='ignore') as myfile:
             fileContents = myfile.read()
             docParams = searchFile(file, "\n"+fileContents)
   
   baseJson.update({"paths":allPaths})
-  print(json.dumps(baseJson, sort_keys=True, indent=4))
-
+  j.setResponse(baseJson)
 
 def ext():
   pass
 
 def internal():
   pass
-  s
+  
 def searchFile(fileName, fileContents):
   serviceName = fileName[:-3] # remove .py
   fileComments = []
@@ -107,7 +108,7 @@ def getPath(serviceName, methodName, isMethodVerb):
       path = serviceSplit[0]+"/"+serviceSplit[2]+"/"+methodName
   return "/"+path
   
-  
+    
 def testService():
 #  {  "method":"POST", "summary" : "Subida de uno o varios contenidos multimedia",
 #                  "description":"Upload de contenidos multimepdia como archivo adjunto.Recibe multipart/form-data.Devuelve un hash.",

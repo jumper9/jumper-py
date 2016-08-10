@@ -1,6 +1,8 @@
 import pymysql
 import sys
 import j
+
+sys.path.insert(0,'../../server')
 import server
 
 debugOn = False
